@@ -1,6 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import axios from 'axios';
 import { refs } from './index';
+import { selectGallery } from './index';
 
 axios.defaults.baseURL = 'https://pixabay.com';
 const API_KEY = '28000983-d0b2a085634fa0bb803984db3';
@@ -36,9 +37,18 @@ async function onFetchPicture(name, isNewRequest) {
   } else {
     refs.btnLoadMore.classList.remove('is-hidden');
   }
-  page += 1;
 
+  page += 1;
   return response.data;
 }
-
 export { onFetchPicture };
+
+// window.addEventListener('scroll', async () => {
+//   const documentRect = document.documentElement.getBoundingClientRect();
+//   console.log('bottom', documentRect.bottom);
+//   if (documentRect.bottom < document.documentElement.clientHeight + 15) {
+//     page += 1;
+//     await selectGallery(response.name);
+//     console.log(response.name);
+//   }
+// });

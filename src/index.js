@@ -1,4 +1,3 @@
-// import { onFetchPicture } from './fetchPicture';
 import { onFetchPicture } from './fetchPicture';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getMarkupCards } from './getMarkupCards';
@@ -16,7 +15,7 @@ refs.btnLoadMore.addEventListener('click', addPageMore);
 
 let gallery = new SimpleLightbox('.gallery a', {});
 
-async function selectGallery(isNewRequest) {
+export async function selectGallery(isNewRequest) {
   try {
     const valueText = refs.searchFormEl.elements.searchQuery.value.trim();
 
@@ -30,6 +29,7 @@ async function selectGallery(isNewRequest) {
       Notify.success(`Hooray! We found ${response.totalHits} images.`);
     }
     getMarkupCards(refs.galleryEl, response);
+
     gallery.refresh();
     if (response.total === 0) {
       Notify.warning(
@@ -60,3 +60,10 @@ function showBtnLoadMore(flag) {
     refs.btnLoadMore.classList.add('is-hidden');
   }
 }
+window.addEventListener('scroll', () => {
+  const documentRect = document.documentElement.getBoundingClientRect();
+  console.log('bottom', documentRect.bottom);
+  if (documentRect.bottom < document.documentElement.clientHeight + 150) {
+    addPageMore();
+  }
+});
