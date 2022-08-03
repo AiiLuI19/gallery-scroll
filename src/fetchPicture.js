@@ -43,12 +43,12 @@ async function onFetchPicture(name, isNewRequest) {
 }
 export { onFetchPicture };
 
-// window.addEventListener('scroll', async () => {
-//   const documentRect = document.documentElement.getBoundingClientRect();
-//   console.log('bottom', documentRect.bottom);
-//   if (documentRect.bottom < document.documentElement.clientHeight + 15) {
-//     page += 1;
-//     await selectGallery(response.name);
-//     console.log(response.name);
-//   }
-// });
+window.addEventListener('scroll', async () => {
+  const documentRect = document.documentElement.getBoundingClientRect();
+  console.log('bottom', documentRect.bottom);
+  if (documentRect.bottom < document.documentElement.clientHeight + 15) {
+    page += 1;
+    await selectGallery(response.name);
+    console.log(response.name);
+  }
+});
